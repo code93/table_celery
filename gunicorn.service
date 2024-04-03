@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/var/lib/jenkins/workspace/DevTest
+ExecStart=/var/lib/jenkins/workspace/DevTest/enven/bin/gunicorn --access-logfile - --workers 3 --timeout 30 --bind unix:/home/ubuntu/project/app.sock devtest.wsgi:application
+#stderr_logfile = /home/ubuntu/workspace/DevTest/logs/api_stderr.log
+#stdout_logfile = /home/ubuntu/workspace/DevTest/logs/api_stdout.log
+[Install]
+WantedBy=multi-user.target
